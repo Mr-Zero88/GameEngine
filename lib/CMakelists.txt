@@ -2,4 +2,3 @@ cmake_minimum_required(VERSION 3.13)
 
 add_subdirectory("openvr")
 target_link_libraries(GameEngine PRIVATE openvr)
-
