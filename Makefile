@@ -3,12 +3,13 @@
 all: build
 
 build:
-	mkdir -p build
-	cd build && cmake ../
+	cmake -S. -Bbuild
 	cmake --build build
 
 debug:
-	mkdir -p build
 	export Debug=true
-	cd build && cmake ../
+	cmake -S. -Bbuild
 	cmake --build build
+
+clean:
+	rm build -R
