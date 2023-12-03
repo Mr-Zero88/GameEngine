@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.13)
+
+project(matrices)
+add_library(matrices INTERFACE)
+target_include_directories(matrices INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")

@@ -2,3 +2,18 @@ cmake_minimum_required(VERSION 3.13)
 
 add_subdirectory("openvr")
 target_link_libraries(GameEngine PRIVATE openvr)
+
+add_subdirectory("vulkan")
+target_link_libraries(GameEngine PRIVATE vulkan)
+
+add_subdirectory("sdl")
+target_link_libraries(GameEngine PRIVATE sdl)
+
+add_subdirectory("lodepng")
+target_link_libraries(GameEngine PRIVATE lodepng)
+
+add_subdirectory("matrices")
+target_link_libraries(GameEngine PRIVATE matrices)
+
+add_subdirectory("pathtools")
+target_link_libraries(GameEngine PRIVATE pathtools)

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.13)
+
+project(vulkan)
+add_library(vulkan INTERFACE)
+target_include_directories(vulkan INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")
+target_link_libraries(openvr INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/vulkan.lib")
