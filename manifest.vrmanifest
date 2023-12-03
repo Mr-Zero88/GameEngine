@@ -1,0 +1,15 @@
+{
+	"source" : "builtin",
+	"applications": [{
+		"app_key": "hellovr_vulkan",
+		"launch_type": "binary",
+		"binary_path_windows": "GameEngine.exe",
+		"is_dashboard_overlay": false,
+		"strings": {
+			"en_us": {
+				"name": "Hello VR",
+				"description": "OpenVR Hello VR"
+			}
+		}
+	}]
+}
