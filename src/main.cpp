@@ -99,6 +99,11 @@
 
 //   return 0;
 // }
+
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#pragma warning(disable : 4267)
+
 //========= Copyright Valve Corporation ============//
 
 #if defined(_WIN32)
@@ -750,7 +755,7 @@ bool CMainApplication::BInit()
     return false;
   }
 
-  installManifest("hellovr_vulkan", true);
+  // installManifest("hellovr_vulkan", true);
   // removeManifest("hellovr_vulkan");
 
   m_pRenderModels = (vr::IVRRenderModels *)vr::VR_GetGenericInterface(vr::IVRRenderModels_Version, &eError);
@@ -1944,7 +1949,8 @@ bool CMainApplication::CreateAllShaders()
     for (int32_t nStage = 0; nStage <= 1; nStage++)
     {
       char shaderFileName[1024];
-      sprintf(shaderFileName, "../shaders/%s_%s.spv", pShaderNames[nShader], pStageNames[nStage]);
+      // sprintf(shaderFileName, "../shaders/%s_%s.spv", pShaderNames[nShader], pStageNames[nStage]);
+      sprintf(shaderFileName, "./content/shaders/%s_%s.spv", pShaderNames[nShader], pStageNames[nStage]);
       std::string shaderPath = Path_MakeAbsolute(shaderFileName, sExecutableDirectory);
 
       FILE *fp = fopen(shaderPath.c_str(), "rb");
@@ -2273,7 +2279,7 @@ void CMainApplication::CreateAllDescriptorSets()
 bool CMainApplication::SetupTexturemaps()
 {
   std::string sExecutableDirectory = Path_StripFilename(Path_GetExecutablePath());
-  std::string strFullPath = Path_MakeAbsolute("../cube_texture.png", sExecutableDirectory);
+  std::string strFullPath = Path_MakeAbsolute("./content/cube_texture.png", sExecutableDirectory);
 
   std::vector<unsigned char> imageRGBA;
   unsigned nImageWidth, nImageHeight;
@@ -3955,3 +3961,5 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+
+#pragma warning(pop)

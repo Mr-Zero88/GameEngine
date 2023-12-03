@@ -1,3 +1,6 @@
+#pragma warning(push)
+#pragma warning(disable : 4996)
+
 //========= Copyright Valve Corporation ============//
 #include "compat.h"
 #include "strtools.cpp"
@@ -796,3 +799,5 @@ std::string GetUserDocumentsPath()
 	return pchHome;
 #endif
 }
+
+#pragma warning(pop)

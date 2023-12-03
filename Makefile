@@ -13,3 +13,8 @@ debug:
 
 clean:
 	rm build -R
+
+start:
+	./build/Debug/GameEngine.exe
+
+run: build start

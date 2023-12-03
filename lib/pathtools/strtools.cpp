@@ -1,3 +1,6 @@
+#pragma warning(push)
+#pragma warning(disable : 4996)
+
 //========= Copyright Valve Corporation ============//
 #include "strtools.h"
 #include <string.h>
@@ -418,3 +421,5 @@ void V_StripExtension(std::string &in)
 		}
 	}
 }
+
+#pragma warning(pop)
