@@ -83,3 +83,4 @@ jobs:
         title: "Development Build"
         files: |
             README.md
+            build/Release/*
