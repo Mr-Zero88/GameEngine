@@ -76,7 +76,7 @@ jobs:
       
     - name: Automatic Releases
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: dir
+      run: dir Release && dir Debug
       
     - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
