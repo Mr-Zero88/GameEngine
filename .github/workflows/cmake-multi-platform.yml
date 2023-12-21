@@ -75,10 +75,6 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
       
     - name: Automatic Releases
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: dir Release && dir Debug
-      
-    - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
