@@ -16,5 +16,5 @@ add_executable("GameEngine" "src/main.cpp")
 
 add_subdirectory("lib")
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/content DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Debug)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/manifest.vrmanifest DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Debug)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/content DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Release)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/manifest.vrmanifest DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Release)
