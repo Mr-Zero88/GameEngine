@@ -3,14 +3,18 @@ cmake_minimum_required(VERSION 3.13)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug$<$<CONFIG:Debug>:Debug>")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 
-add_subdirectory("lib")
 
 project("GameEngine")
 set(CMAKE_CXX_STANDARD 17)
 add_executable("GameEngine" "src/main.cpp")
 
-if(DEFINED ENV{Debug})
-  target_compile_definitions("GameEngine" PUBLIC RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/content/")
-else()
-  target_compile_definitions("GameEngine" PUBLIC RESOURCES_PATH="./content/")
-endif()
+# if(DEFINED ENV{Debug})
+#   target_compile_definitions("GameEngine" PUBLIC RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/content/")
+# else()
+#   target_compile_definitions("GameEngine" PUBLIC RESOURCES_PATH="./content/")
+# endif()
+
+add_subdirectory("lib")
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/content DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Debug)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/manifest.vrmanifest DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/Debug)
