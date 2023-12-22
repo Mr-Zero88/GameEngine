@@ -89,4 +89,4 @@ jobs:
         prerelease: true
         title: "Development Build"
         files: |
-            GameEngine.zip
+            build/Release/GameEngine.zip
