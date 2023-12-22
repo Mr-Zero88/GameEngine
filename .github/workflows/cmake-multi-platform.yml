@@ -74,10 +74,15 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
       
-    - name: Packing build
-      uses: montudor/action-zip@v1
+    - name: Packing Build
+      uses: thedoctor0/zip-release@0.7.5
       with:
-        args: zip -qq -r GameEngine.zip build/Release
+        type: 'zip'
+        filename: 'GameEngine.zip'
+        path: 'build/Release'
+      # uses: montudor/action-zip@v1
+      # with:
+        # args: zip -qq -r GameEngine.zip build/Release
 
     - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
