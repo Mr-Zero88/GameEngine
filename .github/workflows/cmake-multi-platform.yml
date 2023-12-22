@@ -79,10 +79,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'GameEngine.zip'
-        path: 'build/Release'
-      # uses: montudor/action-zip@v1
-      # with:
-        # args: zip -qq -r GameEngine.zip build/Release
+        directory: 'build/Release'
 
     - name: Automatic Releases
       uses: "marvinpinto/action-automatic-releases@latest"
