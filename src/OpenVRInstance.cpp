@@ -35,10 +35,11 @@ class OpenVRInstance
 public:
   std::string Driver;
   std::string Display;
+  vr::IVRSystem *m_pHMD;
   OpenVRInstance()
   {
     vr::EVRInitError eError = vr::VRInitError_None;
-    vr::IVRSystem *m_pHMD = vr::VR_Init(&eError, vr::VRApplication_Scene);
+    m_pHMD = vr::VR_Init(&eError, vr::VRApplication_Scene);
     if (eError != vr::VRInitError_None)
     {
       m_pHMD = NULL;

@@ -32,12 +32,14 @@ namespace fs = std::filesystem;
 
 class SDLWindow
 {
-private:
-  SDL_Window *m_pCompanionWindow;
-
 public:
+  int width;
+  int height;
+  SDL_Window *m_pCompanionWindow;
   SDLWindow(const char *title, int x, int y, int w, int h)
   {
+    this->width = w;
+    this->height = h;
     // if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0)
     // {
     //   char buf[1024];

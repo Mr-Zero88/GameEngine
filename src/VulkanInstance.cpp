@@ -30,6 +30,8 @@ namespace fs = std::filesystem;
 #include "unistd.h"
 #endif
 
+#include "./VulkanExtensions.cpp"
+
 // VK_EXT_debug_report callback
 static VkBool32 VKAPI_PTR VKDebugMessageCallback(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objectType, uint64_t object,
                                                  size_t location, int32_t messageCode, const char *pLayerPrefix, const char *pMessage, void *pUserData)
@@ -63,11 +65,9 @@ static VkBool32 VKAPI_PTR VKDebugMessageCallback(VkDebugReportFlagsEXT flags, Vk
 
 class VulkanInstance
 {
-private:
+public:
   VkInstance m_pInstance;
   VkDebugReportCallbackEXT m_pDebugReportCallback;
-
-public:
   VulkanInstance(const char *ApplicationName)
   {
     std::vector<std::string> requiredInstanceExtensions;
@@ -209,41 +209,5 @@ public:
     delete[] ppEnabledLayerNames;
     delete[] pLayerProperties;
     delete[] pExtensionProperties;
-  }
-
-  void GetVulkanInstanceExtensionsRequired(std::vector<std::string> &outInstanceExtensionList)
-  {
-    outInstanceExtensionList.clear();
-    uint32_t nBufferSize = vr::VRCompositor()->GetVulkanInstanceExtensionsRequired(nullptr, 0);
-    if (nBufferSize > 0)
-    {
-      // Allocate memory for the space separated list and query for it
-      char *pExtensionStr = new char[nBufferSize];
-      pExtensionStr[0] = 0;
-      vr::VRCompositor()->GetVulkanInstanceExtensionsRequired(pExtensionStr, nBufferSize);
-
-      // Break up the space separated list into entries on the CUtlStringList
-      std::string curExtStr;
-      uint32_t nIndex = 0;
-      while (pExtensionStr[nIndex] != 0 && (nIndex < nBufferSize))
-      {
-        if (pExtensionStr[nIndex] == ' ')
-        {
-          outInstanceExtensionList.push_back(curExtStr);
-          curExtStr.clear();
-        }
-        else
-        {
-          curExtStr += pExtensionStr[nIndex];
-        }
-        nIndex++;
-      }
-      if (curExtStr.size() > 0)
-      {
-        outInstanceExtensionList.push_back(curExtStr);
-      }
-
-      delete[] pExtensionStr;
-    }
   }
 };
