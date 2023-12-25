@@ -18,3 +18,9 @@ std::string formatError(std::runtime_error error)
   replace(errorstr, ": ", "\n");
   return errorstr;
 }
+
+void showRuntimeError(std::runtime_error error)
+{
+  std::cout << "Runtime Error: " + std::string(error.what());
+  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Runtime Error", formatError(error).c_str(), NULL);
+}
