@@ -17,6 +17,7 @@ public:
   std::vector<VkFramebuffer> m_pSwapchainFramebuffers;
   std::vector<VkSemaphore> m_pSwapchainSemaphores;
   VkRenderPass m_pSwapchainRenderPass;
+  uint32_t m_nCurrentSwapchainImage;
   VulkanSwapchain(VulkanDevice *vulkanDevice, SDLWindow *window)
   {
     VkResult nResult;
