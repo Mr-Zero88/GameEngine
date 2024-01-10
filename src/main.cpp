@@ -7,6 +7,7 @@
 #include "./VulkanInstance.cpp"
 #include "./Renderer.cpp"
 #include "./OpenVRInstance.cpp"
+#include "./SDLInstance.cpp"
 #include "./SDLWindow.cpp"
 
 int main(int argc, char *argv[])
@@ -16,10 +17,12 @@ int main(int argc, char *argv[])
     VulkanInstance *vulkanInstance = new VulkanInstance("Hello World");
     Renderer *renderer = new Renderer(vulkanInstance);
     OpenVRInstance *vrInstance = new OpenVRInstance();
-    SDLWindow *window = new SDLWindow(std::string("Hello World - " + vrInstance->Driver + " " + vrInstance->Display).c_str(), 700, 100, 640, 320);
+    SDLInstance *sldInstance = new SDLInstance();
+    SDLWindow *window = new SDLWindow(sldInstance, std::string("Hello World - " + vrInstance->Driver + " " + vrInstance->Display).c_str(), 700, 100, 640, 320);
 
     while (window->isOpen && vrInstance->isOpen)
     {
+      sldInstance->Update();
       window->Update();
       vrInstance->Update();
       renderer->Render(window->renderTarget);

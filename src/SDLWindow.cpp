@@ -2,7 +2,9 @@
 
 #include <SDL.h>
 #include <SDL_syswm.h>
+#include <vector>
 
+#include "./SDLInstance.cpp"
 #include "./RenderTarget.cpp"
 
 class SDLWindow
@@ -10,22 +12,18 @@ class SDLWindow
 private:
   int width;
   int height;
+  SDLInstance *sdlInstance;
   SDL_Window *m_pCompanionWindow;
   Uint32 windowID;
 
 public:
   RenderTarget *renderTarget;
   bool isOpen;
-  SDLWindow(const char *title, int x, int y, int w, int h)
+  SDLWindow(SDLInstance *sdlInstance, const char *title, int x, int y, int w, int h)
   {
     this->width = w;
     this->height = h;
-    // if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0)
-    // {
-    //   char buf[1024];
-    //   sprintf_s(buf, sizeof(buf), "SDL_Init - SDL could not initialize! SDL Error: %s\n", SDL_GetError());
-    //   throw std::runtime_error(buf);
-    // }
+    this->sdlInstance = sdlInstance;
 
     m_pCompanionWindow = SDL_CreateWindow(title, x, y, w, h, SDL_WINDOW_SHOWN);
     if (m_pCompanionWindow == NULL)
@@ -35,6 +33,7 @@ public:
       throw std::runtime_error(buf);
     }
     windowID = SDL_GetWindowID(m_pCompanionWindow);
+    sdlInstance->windowEvents->insert_or_assign(windowID, new std::vector<SDL_WindowEvent>());
     isOpen = true;
   }
 
@@ -45,14 +44,21 @@ public:
 
   void Update()
   {
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
+    auto eventList = sdlInstance->windowEvents->at(windowID);
+    for (int i = 0; i < eventList->size(); i++)
     {
-      if (event.window.windowID != windowID)
-        return;
-      if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE)
+      SDL_WindowEvent event = eventList->at(i);
+      switch (event.event)
+      {
+      case SDL_WINDOWEVENT_CLOSE:
         isOpen = false;
+        break;
+
+      default:
+        break;
+      }
     }
+    eventList->clear();
   }
 
   void SetWindowTitle(const char *title)
