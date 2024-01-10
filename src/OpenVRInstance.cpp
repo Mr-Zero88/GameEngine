@@ -40,6 +40,16 @@ public:
 
   void Update()
   {
+    vr::VREvent_t event;
+    while (m_pHMD->PollNextEvent(&event, sizeof(event)))
+    {
+      switch (event.eventType)
+      {
+      case vr::VREvent_Quit:
+        isOpen = false;
+        break;
+      }
+    }
   }
 
   std::string GetTrackedDeviceString(vr::IVRSystem *pHmd, vr::TrackedDeviceIndex_t unDevice, vr::TrackedDeviceProperty prop, vr::TrackedPropertyError *peError = NULL)
